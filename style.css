@@ -83,6 +83,10 @@
     padding-top: 20px;
 }
 /*------------Skills------------*/
+.skills-content
+{
+    padding-top: 20px;
+}
 .skills-bar p
 {
     margin-bottom: 6px;

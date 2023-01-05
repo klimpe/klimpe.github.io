@@ -108,3 +108,42 @@
     border-radius: 16px;
     margin-bottom: 10px;
 }
+/*----------------Article----------------*/
+code {
+    font-family: "Roboto Mono", "Courier New", Courier, monospace;
+    background-color: #ebebeb;
+    color: #027f7f !important;
+    border-radius: 10px;
+    padding: 2px;
+  }
+section {
+	/* height: 75vh;
+	margin: 0; */
+	scroll-margin-top: 5rem;
+}
+/* .article
+{
+    margin: 25px 10%;
+} */
+/*----------------TOC----------------*/
+.active-link {
+    color: red;
+  }
+#toc {
+    margin-top: 50px; /* or margin-top: 50px; */
+    position: sticky;
+    top:100px;
+    margin-left:0px;
+  }
+#toc ul.outer {
+    margin: 0 !important;
+    padding-left: 0 !important;
+  }
+#toc a {
+    color: #027f7f;
+    text-decoration: none;
+ }
+ #toc a:hover {
+    color: #027f7f;
+    text-decoration: underline;
+ }

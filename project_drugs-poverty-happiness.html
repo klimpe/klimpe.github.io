@@ -177,7 +177,7 @@
         <section id="chapter-4-analysis">
           <h2 data-heading="4. Analysis">4. Analysis</h2>
           <section id="subchapter-4.1-firstviz">
-            <h3 data-heading="First Phase of Visualization">First Phase of Visualization</h3>
+            <h3 data-heading="First Phase of Visualization">Types of visualizations</h3>
             <!--------Map: Total Drug Offences vs. Poverty----------->
             <div class='tableauPlaceholder' id='viz1673002249884' style='position: relative'>
               <noscript>
@@ -265,21 +265,39 @@
               vizElement.parentNode.insertBefore(scriptElement, vizElement);
             </script>
 
-            <p>Metrics such as ratio of possession-related offences, trafficking-related offences and total ratio of drug related offences can tell us something about illegal drug market and society, especially if there are associated with such metrics as poverty ratio or happiness score (see below).</p>
+            <p>Metrics such as rate of possession-related offences, trafficking-related offences and total rate of drug related offences can tell us something about illegal drug market and society, especially if there are associated with such metrics as poverty rate or happiness score.</p>
 
             <p>To begin to make sense of the data, I represented drug-related crime rates on a world map along with the percentage of people living in extreme poverty. Two types of offences are (1) related to possession and use and (2) related to trafficking. Along with total drug offence rate, they gave rise to three maps shown above:
-              <ul>
-                <li><code>Total Drug Offences vs. Poverty</code></li>
-                <li><code>Use Offences vs. Poverty</code></li>
-                <li><code>Trafficking Offences vs. Poverty</code></li>
-              </ul>
-            The poverty rate is indicated by the color of circles. Blue corresponds to 0% (or to missing data) and bright red to 81% of the country's population living with under 2.15% a day.</p>
+            <ul>
+              <li><code>Total Drug Offences vs. Poverty</code></li>
+              <li><code>Use Offences vs. Poverty</code></li>
+              <li><code>Trafficking Offences vs. Poverty</code></li>
+            </ul>
+            The poverty rate is indicated by the color of circles. Blue corresponds to 0% (or to missing data), yellow to 0.9% and bright red to 82% of the country's population living with under $2.15 a day.</p>
 
-            <p>On the <code>Use Offences vs. Poverty</code> map, we can clearly see a cluster of high ratio of use offences in the rich European countries. On the map <code>Trafficking Offences vs. Poverty</code> we can see some poorer countries from other regions joining the Europe. We will try to interpret this in the section <a href="subchapter-4.3-police-data">Analysis of the police data</a>.</p>
+            <p>Another type of plot I found useful is scatter plot of rate of a drug-related metric on the x-axis and of the inverse of extreme poverty percentage on the y-axis (so that the poorest remain down on the plot), using logarithmic scales on both axes. They also include the happiness score metric color-coding the reported level of happiness in the presented countries. In the context of police data, three such plots have been created:
+            <ul>
+              <li><code>Drug Offences vs. Poverty and Happiness</code></li>
+              <li><code>Use Offences vs. Poverty and Happiness</code></li>
+              <li><code>Trafficking Offences vs. Poverty and Happiness</code></li>
+            </ul>
+            </p>
+          </section>
+          <section id="subchapter-4.2-police-data">
+            <h3>Analysis of the Police Data</h3>
 
-            <p>Taking another approach to visualization: visualizing the data using scatter plots of ratio of a certain type of offence on the x-axis and of the inverse of extreme poverty percentage on the y-axis (so that the poorest remain down on the plot), using logarithmic scales on both axes, revealed <strong>a negative correlation between registered drug-related offences and poverty</strong>, in other words, as we have already seen on the maps, there are way less offences in poor countries.</p>
+            <p>On the <code>Use Offences vs. Poverty</code> and <code>Total Drug Offences vs. Poverty</code> maps, we can clearly see a cluster of high rate of registered use offences and total offences in the rich European countries.</p>
 
-            <p>Concurrently, the plot also seems to show a trend associating most of the "happier" contries (greener on the plot; mostly European, but also Israel and Morocco) with higher percentage of drug offences. At the same time, if we focus exclusively on drug trafficking offences, filtering out the use, the geography widens to include some developing countries including Colombia, Dominican Republic, Chile, Peru, Zambia, Tunisia and Malaysia.</p>
+            <p>In absolute numbers in our data European countries and North America, richer parts of the world, which represent 33.3% of the countries in the dataset account for 447 931 trafficking offences amounting to 53.2% of world's trafficking cases.</p>
+
+            <p>Usage and posession are more consistently reprimanded in the European part of the world, from 0.07% in Bulgaria to enormous 2.1% in Andorra. By contrast, in poor Sub-Saharan African countries the rate of police actions against drug users and drug trafficking is very low: from 0.00007% in Ghana to 0.008% in Central African Republic of offences being prosecuted. There are, however, some exceptions in cases of Zimbabwe, Botswana, Sudan and Zambia, where drug offence rate is higher. There, it ranges between 0.025% and 0.056% per person.</p>
+
+            <p>On the map <code>Trafficking Offences vs. Poverty</code> and on the scatter plot <code>Trafficking Offences vs. Poverty and Happiness</code> we can see some poorer countries from other regions joining Europe. Indeed, if we focus exclusively on drug trafficking offences, filtering out the punished use, the geography widens to include some developing countries including Colombia, Dominican Republic, Chile, Peru, Zambia, Tunisia and Malaysia.</p>
+
+            The plot <code>Drug Offences vs. Poverty and Happiness</code>  and <code>Trafficking vs. Poverty and Happiness</code> reveal <strong>a negative correlation between registered drug-related offences and poverty</strong>, in other words, as we have already seen on the maps, there are way less offences in poor countries. Inversly, the lower the poverty rate, the more offences are registered.</p>
+
+            <!--------Happiness metric------------>
+            <p>Concurrently, the plot also seems to show a trend associating most of the "happier" contries (greener on the plot; mostly European, but also Israel and Morocco) with higher percentage of drug offences. Furthemore, countries with less than 1% of poverty and more than 0.5% of trafficking rate or more than 0.2% of total drug offence rate tend to have the highest happiness score. In the same time, countries with more than 5% of poverty are likely to be among the most unhappy, independent of their drug offence rates which can range between 0% for Ghana and 0.12% for Georgia. Tajikistan, Uzbekistan, Nepal and Colombia appear to be exeptions which report good happiness score despite poverty rate exceding 6% and relatively low registered offence rate.</p>
 
             <p>However, this kind of police data has its downsides when estimating country's drug use level using the rate of offences. It reflects the result of the actions of law enforsment institutions, which in their turn depend on political and cultural factors. We can easily imagine that in some countries "war on drugs" is not a priority. We can also imagine the existence of corrupt law enforcement officers who charge money in order to avoid to the offenders the court or an official fine. To see the fuller picture of drug use trends we need data of different origin, which is the subject of the next section.</p>
           </section>
@@ -290,19 +308,37 @@
 
             <p>I used <code>Best</code> columns from the sheets on common drugs and <code>Past_Year_Total</code> from the sheet on various so-called NPS (New Psychoactive Substances). Data about NPS is presented on a single sheet, so after deleting all the rows that do not contain my target metric <code>Past_Year_Total</code>, I separated it into one sheet per substance. Per country tables for each common drug type (9) and each NPS (12) became sheets of my <code>summary_drug-poverty-happiness.xlsx</code>. I aggregated data using XLOOKUP on the summary sheet and applied "average" and "maximum" aggregation functions. I named the columns <code>Average_last_year</code> and <code>Max_last_year</code> respectively. I also added <code>What is max</code> column to indicate which drug is the most popular in a given country.</p>
           </section>
-          <section id="subchapter-4.3-police-data">
-            <h3 data-heading="Analysis of the Police Data">Analysis of the Police Data</h3>
-            <p>What immediately catches the attention while looking at the map is that the Western Europe is the region where the highest rate of drug-related offences are registered .</p>
-
-            <p>In absolute numbers in our data European countries and North America, richer parts of the world, which represent 33.3% of the countries in the dataset account for 447 931 trafficking offences which represent 53.2% of world's trafficking cases.</p>
-
-            <p>Usage and posession are also more consistently reprimanded in the European part of the world, from 0.07% in Bulgaria to enormous 2.1% in Andorra. By contrast, in poor Sub-Saharan African countries the rate of police actions against drug users and drug trafficking is very low: from 0.00007% in Ghana to 0.008% in Central African Republic of offences being prosecuted. There are, however, some exceptions in cases of Zimbabwe, Botswana, Sudan and Zambia, where drug offence rate is higher. It ranges between 0.025% and 0.056% per person.</p>
-
-            <p>The figures <code>Offences vs. Poverty and Happiness</code> and <code>Trafficking vs. Poverty and Happiness</code> use logarithmic scale for both axes and color-code the level of happiness of the presented countries. It appears to show a trend of negative correlation between the poverty and unhappiness of the country and the number of registered offences: the lower the poverty rate, the more offences are registered. Furthemore, countries with less than 1% of poverty and more than 0.5% of trafficking rate or more than 0.2% of total drug offence rate tend to have the highest happiness score. In the same time, countries with more than 5% of poverty are likely to be among the most unhappy, independent of their drug offence rates which can range between 0% for Ghana and 0.12% for Georgia. Tajikistan, Uzbekistan, Nepal and Colombia appear to be exeptions which report good happiness score despite poverty rate exceding 6% and relatively low registered offence rate.</p>
-          </section>
           <section id="subchapter-4.4-survey-data">
-            <h3 data-heading="Analysis of the Survey Data">Analysis of the Survey Data</h3>
-
+            <h3>Analysis of the Survey Data</h3>
+            <!-------Map: Average Last Year Usage vs. Poverty-------->
+            <div class='tableauPlaceholder' id='viz1673039469792'   style='position: relative'>
+              <noscript>
+                <a href='#'><img alt='Average Last Year Usage vs. Poverty ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Dr&#47;DrugsPovertyandHappiness&#47;MapAverageUsevs_Poverty2&#47;1_rss.png' style='border: none' /></a>
+              </noscript>
+              <object class='tableauViz'  style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='DrugsPovertyandHappiness&#47;MapAverageUsevs_Poverty2' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Dr&#47;DrugsPovertyandHappiness&#47;MapAverageUsevs_Poverty2&#47;1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+              </object>
+            </div>
+            <script type='text/javascript'>
+            var divElement = document.getElementById('viz1673039469792');
+                var vizElement = divElement.getElementsByTagName('object')[0];
+                vizElement.style.width='90%';vizElement.style.height=(divElement.offsetWidth*0.55)+'px';
+                var scriptElement = document.createElement('script');
+                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                vizElement.parentNode.insertBefore(scriptElement, vizElement);
+            </script>
             <p>It is obvious from the distributions in <code>Average Use Last Year vs. Poverty and Happiness</code> and in <code>Max Use Last Year vs. Poverty and Happiness</code> scatter plots that there is no relation between usage and poverty. On the one hand, usage can be high in both poorest countires (like Zambia, Madagascar, Haiti and Nigeria) and the countries less touched by poverty (for example France, Switzerland and Ireland), on the other hand, low usage occurs in the poorest countries with more than 10% of extreme poverty (Congo, Turkmenistan, Senegal) and the those with less than 1% of extreme poverty (Turkey, South Korea, Moldova). The same can be seen on the map <code>Average Last Year Usage vs. Poverty</code>, the distribution on which contrasts with maps based on police reports.</p>
 
             <p>Given information from the previous section we can conclude that there probably is a relation between police interventions against users and traffickants in poorer and wealthier countries, but there is no relation between poverty and actual drug use. The trend identified in the previous section is rooted in law enforcement practices. The police pays more attention to the drug-related offences in wealthier contries.</p>

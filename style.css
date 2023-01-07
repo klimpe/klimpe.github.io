@@ -126,7 +126,7 @@ section {
     margin: 25px 10%;
 } */
 /*----------------TOC----------------*/
-.active-link {
+.current {
     color: red;
   }
 #toc {

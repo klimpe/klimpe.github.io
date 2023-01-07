@@ -6,45 +6,26 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js”></script>
+  <!-- <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js”></script> -->
   <script>
-    // JavaScript
-    $(document).ready(function() {
-      // Cache selectors
-      var lastId,
-          topMenu = $("#toc"),
-          topMenuHeight = topMenu.outerHeight()+15,
-          // All list items
-          menuItems = topMenu.find("a"),
-          // Anchors corresponding to menu items
-          scrollItems = menuItems.map(function(){
-            var item = $($(this).attr("href"));
-            if (item.length) { return item; }
-          });
+    window.onload = function() {
+    function highlightCurrentChapter() {
+      // Get the list of chapters in the TOC
+      var chapters = document.querySelectorAll('#toc li');
 
-      // Bind to scroll
-      $(window).scroll(function(){
-        // Get container scroll position
-        var fromTop = $(this).scrollTop()+topMenuHeight;
-
-        // Get id of current scroll item
-        var cur = scrollItems.map(function(){
-          if ($(this).offset().top < fromTop)
-            return this;
-        });
-        // Get the id of the current element
-        cur = cur[cur.length-1];
-        var id = cur && cur.length ? cur[0].id : "";
-
-        if (lastId !== id) {
-            lastId = id;
-            // Set/remove active class
-            menuItems
-              .parent().removeClass("active-link")
-              .end().filter("[href='#"+id+"']").parent().addClass("active-link");
-        }
+      // Find the current chapter by comparing the anchor element's href to the current URL
+      var currentChapter = Array.prototype.find.call(chapters, function(chapter) {
+        return chapter.querySelector('a').href == window.location.href;
       });
-    });
+
+      // If a current chapter was found, add the "current" class to it
+      if (currentChapter) {
+        currentChapter.classList.add('current');
+      }
+    }
+  }
+    // Call the highlightCurrentChapter function when the page loads
+    //window.addEventListener('load', highlightCurrentChapter);
   </script>
 </head>
 <body>
@@ -98,9 +79,9 @@
             <li class="nav-link"><a href="#chapter-3-process">3. Process</a></li>
             <li class="nav-link"><a href="#chapter-4-analysis">4. Analyze</a></li>
               <ul class="nav-item">
-                <li class="nav-link"><a href="#subchapter-4.1-firstviz">First visualizations</a></li>
-                <li class="nav-link"><a href="#subchapter-4.2-new-metrics">Creating Additional Metrics</a></li>
-                <li class="nav-link"><a href="#subchapter-4.3-police-data">Analysis of Police Data</a></li>
+                <li class="nav-link"><a href="#subchapter-4.1-type-viz">Types of Visualizations</a></li>
+                <li class="nav-link"><a href="#subchapter-4.2-police-data">Analysis of Police Data</a></li>
+                <li class="nav-link"><a href="#subchapter-4.3-new-metrics">Creating Additional Metrics</a></li>
                 <li class="nav-link"><a href="#subchapter-4.4-survey-data">Analysis of Survey Data</a></li>
               </ul>
             </li>
@@ -176,8 +157,8 @@
         </section>
         <section id="chapter-4-analysis">
           <h2 data-heading="4. Analysis">4. Analysis</h2>
-          <section id="subchapter-4.1-firstviz">
-            <h3 data-heading="First Phase of Visualization">Types of visualizations</h3>
+          <section id="subchapter-4.1-type-viz">
+            <h3>Types of Visualizations</h3>
             <!--------Map: Total Drug Offences vs. Poverty----------->
             <div class='tableauPlaceholder' id='viz1673002249884' style='position: relative'>
               <noscript>
@@ -301,7 +282,7 @@
 
             <p>However, this kind of police data has its downsides when estimating country's drug use level using the rate of offences. It reflects the result of the actions of law enforsment institutions, which in their turn depend on political and cultural factors. We can easily imagine that in some countries "war on drugs" is not a priority. We can also imagine the existence of corrupt law enforcement officers who charge money in order to avoid to the offenders the court or an official fine. To see the fuller picture of drug use trends we need data of different origin, which is the subject of the next section.</p>
           </section>
-          <section id="subchapter-4.2-new-metrics">
+          <section id="subchapter-4.3-new-metrics">
             <h3 data-heading="Creating Additional Metrics">Creating Additional Metrics</h3>
 
             <p><a href="https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-2022.html">The World Drugs Report 2022</a> provides us with a spreadsheet containing information about percentage of people having used drugs in the last year broken down by different types of drugs in the spreadsheet <code>1.2_-_Prevalence_of_drug_use_in_the_general_population_including_NPS_national_data.xlsx</code> provided by <a href="https://www.unodc.org/">UNODC</a> as a part of Statistical annex to the World Drug Report 2022. I decided to estimate general drug consumption from this data. But what function to use to aggregate the data? Sum is the first that comes to mind. But it has a problem: as people from these surveys could use more than one type of drug, it does not make sense to simply add the percentages across different types of drugs. That is why I decided to take <em>the average and the maximum across types of drugs</em> for the most recent year available to estimate countries' consumption level.</p>
@@ -309,7 +290,7 @@
             <p>I used <code>Best</code> columns from the sheets on common drugs and <code>Past_Year_Total</code> from the sheet on various so-called NPS (New Psychoactive Substances). Data about NPS is presented on a single sheet, so after deleting all the rows that do not contain my target metric <code>Past_Year_Total</code>, I separated it into one sheet per substance. Per country tables for each common drug type (9) and each NPS (12) became sheets of my <code>summary_drug-poverty-happiness.xlsx</code>. I aggregated data using XLOOKUP on the summary sheet and applied "average" and "maximum" aggregation functions. I named the columns <code>Average_last_year</code> and <code>Max_last_year</code> respectively. I also added <code>What is max</code> column to indicate which drug is the most popular in a given country.</p>
           </section>
           <section id="subchapter-4.4-survey-data">
-            <h3>Analysis of the Survey Data</h3>
+            <h3>Analysis of Survey Data</h3>
             <!-------Map: Average Last Year Usage vs. Poverty-------->
             <div class='tableauPlaceholder' id='viz1673039469792'   style='position: relative'>
               <noscript>

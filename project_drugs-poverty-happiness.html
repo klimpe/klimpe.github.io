@@ -7,27 +7,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js”></script> -->
-  <script>
-    window.onload = function() {
-    function highlightCurrentChapter() {
-      // Get the list of chapters in the TOC
-      var chapters = document.querySelectorAll('#toc li');
-
-      // Find the current chapter by comparing the anchor element's href to the current URL
-      var currentChapter = Array.prototype.find.call(chapters, function(chapter) {
-        return chapter.querySelector('a').href == window.location.href;
-      });
-
-      // If a current chapter was found, add the "current" class to it
-      if (currentChapter) {
-        currentChapter.classList.add('current');
-      }
-    }
-  }
-    // Call the highlightCurrentChapter function when the page loads
-    //window.addEventListener('load', highlightCurrentChapter);
-  </script>
 </head>
 <body>
   <!-----NavigationBar----->
@@ -78,8 +57,8 @@
             <li class="nav-link"><a href="#chapter-1-ask">1. Ask</a>
             <li class="nav-link"><a href="#chapter-2-prepare">2. Prepare</a></li>
             <li class="nav-link"><a href="#chapter-3-process">3. Process</a></li>
-            <li class="nav-link"><a href="#chapter-4-analysis">4. Analyze</a></li>
-              <ul class="nav-item">
+            <li class="nav-link containing-ul"><a href="#chapter-4-analysis">4. Analyze</a>
+              <ul class="nav-item inner">
                 <li class="nav-link"><a href="#subchapter-4.1-type-viz">Types of Visualizations</a></li>
                 <li class="nav-link"><a href="#subchapter-4.2-police-data">Analysis of Police Data</a></li>
                 <li class="nav-link"><a href="#subchapter-4.3-new-metrics">Creating Additional Metrics</a></li>
@@ -105,33 +84,44 @@
             Political decision-makers.</li>
             <li>Who is your audience?<br>
             Political leaders and general public.</li>
+            <li>Questions:
+              <ul>
+                <li>What is the relationship between factors like happiness and poverty and drug-related behaviour?</li>
+                <li>Which parts of the world succeeded to maximize happiness of their citizens? What kind drug policies could be linked with that?</li>
+                <li>Which regions struggle with poverty and how does this reflect on their drug consumption?</li>
+              </ul>
+            </li>
           </ul>
-          <p>Questions:<br>
-          What factors (like happiness and poverty) are correlated with drug-related behaviour?</p>
+
+
         </section>
         <section id="chapter-2-prepare">
           <h2 data-heading="2. Prepare">2. Prepare</h2>
           <h3 data-heading="Finding the Datasets">Finding the Datasets</h3>
           <p>The data comes from 4 different sources.</p>
           <ul>
-            <li>World Drug Report 2022 (WDR 2022)</li>
-            <ul>
-              <li>Drug-related offences</li>
-              <li>Last year usage ratios per drug type</li>
-            </ul>
-            <li>Population by Country - 2020</li>
-            <ul>
-              <li>Population</li>
-            </ul>
-            <li>World Bank Poverty and Inequality Platform (PIP)
-            <ul>
-              <li>Poverty ratio</li>
-            </ul>
-            <li>World Happiness Report (2019)</li>
-            <ul>
-              <li>Happiness score</li>
-              <li>Happiness rank</li>
-            </ul>
+            <li><a class="text" href="https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-2022.html">World Drug Report 2022 (WDR 2022)</a>, provided by <a href="https://www.unodc.org/" class="text">United Nations Office on Drugs and Crime</a> (UNODC)
+              <ul>
+                <li>Drug-related offences</li>
+                <li>Last year usage ratios per drug type</li>
+              </ul>
+            </li>
+            <li><a class="text external-link" href="https://www.kaggle.com/datasets/tanuprabhu/population-by-country-2020?select=population_by_country_2020.csv">Population by Country - 2020</a> from Kaggle
+              <ul>
+                <li>Population</li>
+              </ul>
+            </li>
+            <li><a href="https://pip.worldbank.org/home" class="text">World Bank Poverty and Inequality Platform</a> (PIP) poverty data made available by <a class="text" href="https://ourworldindata.org/poverty#explore-data-poverty">Our World in Data</a> on <a href="https://github.com/owid/poverty-data" class="text">GitHub</a>
+              <ul>
+                <li>Extreme poverty ratio</li>
+              </ul>
+            </li>
+            <li><a class="text external-link" href="https://www.kaggle.com/datasets/unsdsn/world-happiness?select=2019.csv">World Happiness Report (2019)</a> from Kaggle
+              <ul>
+                <li>Happiness score</li>
+                <li>Happiness rank</li>
+              </ul>
+            </li>
           </ul>
         </section>
         <section id="chapter-3-process">
@@ -139,22 +129,23 @@
           <h3 data-heading="Data Preprocessing">Data Preprocessing</h3>
           <ol>
           <li>Convert <code>10.1_-_Drug_related_crimes.xlsx</code>  to <code>10.1_-_Drug_related_crimes.csv</code>,</li>
-          <li>Keep only sheet 2: `10.1_-_Drug_related_crimes</li>
+          <li>Keep only sheet 2: <code>10.1_-_Drug_related_crimes</code></li>
           <li>Missing data: I want to extract only values for the year 2020 but some countries don't have records in 2020, so I use SQL to extract the <em>most recent year</em> <sup data-footnote-id="fnref-1-b6efabc080de551a" class="footnote-ref"><a href="#fn-1-b6efabc080de551a" class="footnote-link text">[1]</a></sup> available for these countries: <a href="preprocessing_offences_with_sql.html" class="internal-link text">Preprocessing Offences with SQL</a>. I got rid of unnecessary columns, leaving only <code>Country</code>, <code>Year</code>, <code>Use</code>, <code>Trafficking</code>, <code>Total</code></li>
           <li>After SQL processing I downloaded CSV from BigQuery as <code>Offences_raw.csv</code></li>
           <li>I detected missing values represented as empty cells in <code>Use</code>, <code>Trafficking</code> and <code>Total</code> columns and replaced the with the string "null".</li>
-          <li>I downloaded population data by contry from <a aria-label-position="top" aria-label="https://www.kaggle.com/datasets/tanuprabhu/population-by-country-2020?select=population_by_country_2020.csv" rel="noopener" class="text external-link" href="https://www.kaggle.com/datasets/tanuprabhu/population-by-country-2020?select=population_by_country_2020.csv" target="_blank">Kaggle: Population by Country - 2020</a></li>
+          <li>I downloaded population data by contry from Kaggle.</li>
           <li>I made sure that country names in <code>Offences</code> and <code>population_2020</code> tables are the same, I edited the names from the second table to match the first.</li>
           <li>Philipinnes occur two times in the <code>Offences</code> as "Phillipines 2016" and "Phillipines (the) 2020", I kept the first one as numbers of offences in the second are suspiciously low. Same naming inconsistency problem with Respublic of Moldova, Russian Federation, United Kingdom. Also, Turkey for 2020 was doubled as Türkiye for 2019. I kept the most recent data for all these cases.</li>
           <li>I used <code>XLOOKUP</code> function in Excel to aggregate data by inserting <code>Population</code> column from <code>population_2020</code> to the <code>Offences</code> table.</li>
           <li>I calculated the rate of  <code>Use</code>, <code>Trafficking</code> and <code>Total</code> offences per capita in percentage by dividing each one of them by the population and multiplying by 100. Thus, three new columns were created: <code>Use_per_capita</code>, <code>Trafficking_per_capita</code> and <code>Total_per_capita</code>.</li>
-          <li>I extracted  the most recent data for each country in <a aria-label-position="top" aria-label="Poverty Data Source" data-href="Poverty Data Source" href="Poverty Data Source" class="text internal-link" target="_blank" rel="noopener">poverty data</a> by using an <a aria-label-position="top" aria-label="Poverty Data Extraction" data-href="Poverty Data Extraction" href="Poverty Data Extraction" class="text internal-link" target="_blank" rel="noopener">SQL query</a> in BigQuery. Only Purchasing Power Parity (PPP) for 2017 was selected, which means that the extreme poverty is defined by income or expenditure under $2.15 per day per person.</li>
+          <li>I extracted  the most recent data for each country in poverty data by using a <a href="preprocessing_poverty_with_sql.html" class="text internal-link">SQL query</a> in BigQuery. Only Purchasing Power Parity (PPP) for 2017 was selected, which means that the extreme poverty is defined by income or expenditure under $2.15 per day per person.</li>
           <li>The resulting table was added as a new sheet to the same Excel file <code>summary_drugs-poverty-happiness.xlsx</code>.</li>
           <li>I used XLOOKUP to integrate the poverty data from the column <code>headcount_ratio_international_povline</code> to the main summary table, replacing missing values by <code>null</code>.</li>
           <li>I manually changed France's data on drug offences to 2018, because the figure for 2020 which was selected previously was unrealistically low.</li>
-          <li>I added <code>Happiness</code> and <code>Happiness_rank</code> columns by country for 2019 (the most recent available). Source: <a aria-label-position="top" aria-label="https://www.kaggle.com/datasets/unsdsn/world-happiness?select=2019.csv" rel="noopener" class="text external-link" href="https://www.kaggle.com/datasets/unsdsn/world-happiness?select=2019.csv" target="_blank">Kaggle: World Happiness Report</a></li>
+          <li>I added <code>Happiness</code> and <code>Happiness_rank</code> columns by country for 2019 (the most recent available) from the World Happiness Report on Kaggle
+          <ul><li>In the World Happiness Report Congo is divided to Congo (Brazzaville) and Congo (Kinshasa) with different happiness values for each. How to convey this in my per-country data? The adopted solution was to average these two values. This created another problem: what value to put in the <code>Happiness_rank</code>?</li></ul></li>
           </ol>
-          <p>In the World Happiness Report Congo is divided to Congo (Brazzaville) and Congo (Kinshasa) with different happiness values for each. How to convey this in my per-country data? The adopted solution was to average these two values. This created another problem: what value to put in the <code>Happiness_rank</code>?</p>
+          <p></p>
         </section>
         <section id="chapter-4-analysis">
           <h2 data-heading="4. Analysis">4. Analysis</h2>
@@ -378,7 +369,7 @@
           <section id="subchapter-4.3-new-metrics">
             <h3 data-heading="Creating Additional Metrics">Creating Additional Metrics</h3>
 
-            <p><a class="text" href="https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-2022.html">The World Drugs Report 2022</a> provides us with a spreadsheet containing information about percentage of people having used drugs in the last year broken down by different types of drugs in the spreadsheet <code>1.2_-_Prevalence_of_drug_use_in_the_general_population_including_NPS_national_data.xlsx</code> provided by <a href="https://www.unodc.org/" class="text">UNODC</a> as a part of the Statistical annex to the World Drug Report 2022. I decided to estimate general drug consumption from this data. But what function to use to aggregate the data? Sum is the first that comes to mind. But it has a problem: as people from these surveys could use more than one type of drug, it does not make sense to simply add the percentages across different types of drugs. That is why I decided to take <em>the average and the maximum across types of drugs</em> for the most recent year available to estimate countries' consumption level.</p>
+            <p><a class="text" href="https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-2022.html">The World Drug Report 2022</a> provides us with a spreadsheet containing information about percentage of people having used drugs in the last year broken down by different types of drugs in the spreadsheet <code>1.2_-_Prevalence_of_drug_use_in_the_general_population_including_NPS_national_data.xlsx</code> provided by <a href="https://www.unodc.org/" class="text">UNODC</a> as a part of the Statistical annex to the World Drug Report 2022. I decided to estimate general drug consumption from this data. But what function to use to aggregate the data? Sum is the first that comes to mind. But it has a problem: as people from these surveys could use more than one type of drug, it does not make sense to simply add the percentages across different types of drugs. That is why I decided to take <em>the average and the maximum across types of drugs</em> for the most recent year available to estimate countries' consumption level.</p>
 
             <p>I used <code>Best</code> columns from the sheets on common drugs and <code>Past_Year_Total</code> from the sheet on various so-called NPS (New Psychoactive Substances). Data about NPS is presented on a single sheet, so after deleting all the rows that do not contain my target metric <code>Past_Year_Total</code>, I separated it into one sheet per substance. Per country tables for each common drug type (9) and each NPS (12) became sheets of my <code>summary_drug-poverty-happiness.xlsx</code>. I aggregated data using XLOOKUP on the summary sheet and applied "average" and "maximum" aggregation functions. I named the columns <code>Average_last_year</code> and <code>Max_last_year</code> respectively. I also added a <code>What_is_max</code> column to indicate which drug is the most popular in a given country.</p>
           </section>

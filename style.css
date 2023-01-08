@@ -126,9 +126,6 @@ section {
     margin: 25px 10%;
 } */
 /*----------------TOC----------------*/
-.current {
-    color: red;
-  }
 #toc
 {
     margin-top: 50px; /* or margin-top: 50px; */
@@ -140,6 +137,15 @@ section {
 {
     margin: 0 !important;
     padding-left: 0 !important;
+}
+#toc ul.inner
+{
+    margin: 0 !important;
+    padding-left: 0 !important;
+}
+#toc li.containing-ul
+{
+    padding-bottom: 0px;
 }
 #toc a
 {

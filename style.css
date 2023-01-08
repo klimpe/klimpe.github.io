@@ -129,26 +129,35 @@ section {
 .current {
     color: red;
   }
-#toc {
+#toc
+{
     margin-top: 50px; /* or margin-top: 50px; */
     position: sticky;
     top:100px;
     margin-left:0px;
-  }
-#toc ul.outer {
+}
+#toc ul.outer
+{
     margin: 0 !important;
     padding-left: 0 !important;
-  }
-#toc a {
+}
+#toc a
+{
     color: #027f7f;
     text-decoration: none;
  }
- #toc a:hover {
+ #toc a:hover
+ {
     color: #027f7f;
     text-decoration: underline;
  }
  /*---------------Tableau Viz------------*/
  .tableauPlaceholder
  {
-    margin:auto;
+    margin:auto;  /* centering the vizzes */
  }
+/*-----------Throughout the text------------*/
+a.text
+{
+    color: #01aeae !important;
+}

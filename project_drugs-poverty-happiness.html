@@ -139,19 +139,19 @@
           <ol>
           <li>Convert <code>10.1_-_Drug_related_crimes.xlsx</code>  to `10.1_-_Drug_related_crimes.csv,</li>
           <li>Keep only sheet 2: `10.1_-_Drug_related_crimes</li>
-          <li>Missing data: I want to extract only values for the year 2020 but some countries don't have records in 2020, so I use SQL to extract the <strong>most recent year</strong> <sup data-footnote-id="fnref-1-b6efabc080de551a" class="footnote-ref" id="fnref-1-b6efabc080de551a"><a href="#fn-1-b6efabc080de551a" class="footnote-link" target="_blank" rel="noopener">[1]</a></sup> available for these countries: <a data-href="Preprocessing Offences with SQL" href="Preprocessing Offences with SQL" class="internal-link" target="_blank" rel="noopener">Preprocessing Offences with SQL</a>. I got rid of unnecessary columns, leaving only <code>Country</code>, <code>Year</code>, <code>Use</code>, <code>Trafficking</code>, <code>Total</code></li>
+          <li>Missing data: I want to extract only values for the year 2020 but some countries don't have records in 2020, so I use SQL to extract the <strong>most recent year</strong> <sup data-footnote-id="fnref-1-b6efabc080de551a" class="footnote-ref" id="fnref-1-b6efabc080de551a"><a href="#fn-1-b6efabc080de551a" class="footnote-link text" target="_blank" rel="noopener">[1]</a></sup> available for these countries: <a data-href="Preprocessing Offences with SQL" href="Preprocessing Offences with SQL" class="internal-link text" target="_blank" rel="noopener">Preprocessing Offences with SQL</a>. I got rid of unnecessary columns, leaving only <code>Country</code>, <code>Year</code>, <code>Use</code>, <code>Trafficking</code>, <code>Total</code></li>
           <li>After SQL processing I downloaded CSV from BigQuery as <code>Offences_raw.csv</code></li>
           <li>I detected missing values represented as empty cells in <code>Use</code>, <code>Trafficking</code> and <code>Total</code> columns and replaced the with the string "null".</li>
-          <li>I downloaded population data by contry from <a aria-label-position="top" aria-label="https://www.kaggle.com/datasets/tanuprabhu/population-by-country-2020?select=population_by_country_2020.csv" rel="noopener" class="external-link" href="https://www.kaggle.com/datasets/tanuprabhu/population-by-country-2020?select=population_by_country_2020.csv" target="_blank">Kaggle: Population by Country - 2020</a></li>
+          <li>I downloaded population data by contry from <a aria-label-position="top" aria-label="https://www.kaggle.com/datasets/tanuprabhu/population-by-country-2020?select=population_by_country_2020.csv" rel="noopener" class="text external-link" href="https://www.kaggle.com/datasets/tanuprabhu/population-by-country-2020?select=population_by_country_2020.csv" target="_blank">Kaggle: Population by Country - 2020</a></li>
           <li>I made sure that country names in <code>Offences</code> and <code>population_2020</code> tables are the same, I edited the names from the second table to match the first.</li>
           <li>Philipinnes occur two times in the <code>Offences</code> as "Phillipines 2016" and "Phillipines (the) 2020", I kept the first one as numbers of offences in the second are suspiciously low. Same naming inconsistency problem with Respublic of Moldova, Russian Federation, United Kingdom. Also, Turkey for 2020 was doubled as Türkiye for 2019. I kept the most recent data for all these cases.</li>
           <li>I used <code>XLOOKUP</code> function in Excel to aggregate data by inserting <code>Population</code> column from <code>population_2020</code> to the <code>Offences</code> table.</li>
           <li>I calculated the rate of  <code>Use</code>, <code>Trafficking</code> and <code>Total</code> offences per capita in percentage by dividing each one of them by the population and multiplying by 100. Thus, three new columns were created: <code>Use_per_capita</code>, <code>Trafficking_per_capita</code> and <code>Total_per_capita</code>.</li>
-          <li>I extracted  the most recent data for each country in <a aria-label-position="top" aria-label="Poverty Data Source" data-href="Poverty Data Source" href="Poverty Data Source" class="internal-link" target="_blank" rel="noopener">poverty data</a> by using an <a aria-label-position="top" aria-label="Poverty Data Extraction" data-href="Poverty Data Extraction" href="Poverty Data Extraction" class="internal-link" target="_blank" rel="noopener">SQL query</a> in BigQuery. Only Purchasing Power Parity (PPP) for 2017 was selected, which means that the extreme poverty is defined by income or expenditure under $2.15 per day per person.</li>
+          <li>I extracted  the most recent data for each country in <a aria-label-position="top" aria-label="Poverty Data Source" data-href="Poverty Data Source" href="Poverty Data Source" class="text internal-link" target="_blank" rel="noopener">poverty data</a> by using an <a aria-label-position="top" aria-label="Poverty Data Extraction" data-href="Poverty Data Extraction" href="Poverty Data Extraction" class="text internal-link" target="_blank" rel="noopener">SQL query</a> in BigQuery. Only Purchasing Power Parity (PPP) for 2017 was selected, which means that the extreme poverty is defined by income or expenditure under $2.15 per day per person.</li>
           <li>The resulting table was added as a new sheet to the same Excel file <code>summary_drugs-poverty-happiness.xlsx</code>.</li>
           <li>I used XLOOKUP to integrate the poverty data from the column <code>headcount_ratio_international_povline</code> to the main summary table, replacing missing values by <code>null</code>.</li>
           <li>I manually changed France's data on drug offences to 2018, because the figure for 2020 which was selected previously was unrealistically low.</li>
-          <li>I added <code>Happiness</code> and <code>Happiness_rank</code> columns by country for 2019 (the most recent available). Source: <a aria-label-position="top" aria-label="https://www.kaggle.com/datasets/unsdsn/world-happiness?select=2019.csv" rel="noopener" class="external-link" href="https://www.kaggle.com/datasets/unsdsn/world-happiness?select=2019.csv" target="_blank">Kaggle: World Happiness Report</a></li>
+          <li>I added <code>Happiness</code> and <code>Happiness_rank</code> columns by country for 2019 (the most recent available). Source: <a aria-label-position="top" aria-label="https://www.kaggle.com/datasets/unsdsn/world-happiness?select=2019.csv" rel="noopener" class="text external-link" href="https://www.kaggle.com/datasets/unsdsn/world-happiness?select=2019.csv" target="_blank">Kaggle: World Happiness Report</a></li>
           </ol>
           <p>In the World Happiness Report Congo is divided to Congo (Brazzaville) and Congo (Kinshasa) with different happiness values for each. How to convey this in my per-country data? The adopted solution was to average these two values. This created another problem: what value to put in the <code>Happiness_rank</code>?</p>
         </section>
@@ -344,7 +344,7 @@
             </ul>
             The poverty rate is indicated by the color of circles. Blue corresponds to 0% (or to missing data), yellow to 0.9% and bright red to 82% of the country's population living with under $2.15 a day.</p>
 
-            <p>Another type of plot I found useful is scatter plot of rate of a drug-related metric on the x-axis and of the inverse of extreme poverty percentage on the y-axis (so that the poorest remain down on the plot), using logarithmic scales on both axes. They also include the happiness score metric color-coding the reported level of happiness in the presented countries. In the context of police data, three such plots have been created:
+            <p>Another type of plot I found useful is a scatter plot of rate of a drug-related metric on the x-axis and of the inverse of extreme poverty percentage on the y-axis (so that the poorest remain down on the plot), using logarithmic scales on both axes. They also include the happiness score metric, color-coding the reported level of happiness in the presented countries. In the context of police data, three such plots have been created:
             <ul>
               <li><code>Drug Offences vs. Poverty and Happiness</code></li>
               <li><code>Use Offences vs. Poverty and Happiness</code></li>
@@ -353,29 +353,29 @@
             </p>
           </section>
           <section id="subchapter-4.2-police-data">
-            <h3>Analysis of the Police Data</h3>
+            <h3>Analysis of Police Data</h3>
 
             <p>On the <code>Use Offences vs. Poverty</code> and <code>Total Drug Offences vs. Poverty</code> maps, we can clearly see a cluster of high rate of registered use offences and total offences in the rich European countries.</p>
 
             <p>In absolute numbers in our data European countries and North America, richer parts of the world, which represent 33.3% of the countries in the dataset account for 447 931 trafficking offences amounting to 53.2% of world's trafficking cases.</p>
 
-            <p>Usage and posession are more consistently reprimanded in the European part of the world, from 0.07% in Bulgaria to enormous 2.1% in Andorra. By contrast, in poor Sub-Saharan African countries the rate of police actions against drug users and drug trafficking is very low: from 0.00007% in Ghana to 0.008% in Central African Republic of offences being prosecuted. There are, however, some exceptions in cases of Zimbabwe, Botswana, Sudan and Zambia, where drug offence rate is higher. There, it ranges between 0.025% and 0.056% per person.</p>
+            <p>Usage and possession are more consistently reprimanded in the European part of the world, from 0.07% in Bulgaria to enormous 2.1% in Andorra. By contrast, in poor Sub-Saharan African countries, the rate of police actions against drug users and drug trafficking is very low: from 0.00007% in Ghana to 0.008% in the Central African Republic of offences being prosecuted. There are, however, some exceptions in cases of Zimbabwe, Botswana, Sudan and Zambia, where drug offence rate is higher. There, it ranges between 0.025% and 0.056% per person.</p>
 
-            <p>On the map <code>Trafficking Offences vs. Poverty</code> and on the scatter plot <code>Trafficking Offences vs. Poverty and Happiness</code> we can see some poorer countries from other regions joining Europe. Indeed, if we focus exclusively on drug trafficking offences, filtering out the punished use, the geography widens to include some developing countries including Colombia, Dominican Republic, Chile, Peru, Zambia, Tunisia and Malaysia.</p>
+            <p>On the map <code>Trafficking Offences vs. Poverty</code> and on the scatter plot <code>Trafficking Offences vs. Poverty and Happiness</code> we can see some poorer countries from other regions joining Europe. Indeed, if we focus exclusively on drug trafficking offences, filtering out the punished use, the geography widens to include some developing countries including Colombia, Dominican Republic, Chile, Peru, Zambia, Tunisia, and Malaysia.</p>
 
-            <p>The plot <code>Drug Offences vs. Poverty and Happiness</code>  and <code>Trafficking vs. Poverty and Happiness</code> reveal <strong>a negative correlation between registered drug-related offences and poverty</strong>, in other words, as we have already seen on the maps, there are way less offences in poor countries. Inversly, the lower the poverty rate, the more offences are registered.</p>
+            <p>The plot <code>Drug Offences vs. Poverty and Happiness</code>  and <code>Trafficking vs. Poverty and Happiness</code> reveal <strong>a negative correlation between registered drug-related offences and poverty</strong>, in other words, as we have already seen on the maps, there are way less offences in poor countries. Inversely, the lower the poverty rate, the more offences are registered.</p>
 
             <!--------Happiness metric------------>
-            <p>Concurrently, the plot also seems to show a trend associating most of the "happier" contries (greener on the plot; mostly European, but also Israel and Morocco) with higher percentage of drug offences. Furthemore, countries with less than 1% of poverty and more than 0.5% of trafficking rate or more than 0.2% of total drug offence rate tend to have the highest happiness score. In the same time, countries with more than 5% of poverty are likely to be among the most unhappy, independent of their drug offence rates which can range between 0% for Ghana and 0.12% for Georgia. Tajikistan, Uzbekistan, Nepal and Colombia appear to be exeptions which report good happiness score despite poverty rate exceding 6% and relatively low registered offence rate.</p>
+            <p>Concurrently, the plot also seems to show a trend associating most of the "happier" countries (greener on the plot; mostly European, but also Israel and Morocco) with higher percentage of drug offences. Furthermore, countries with less than 1% of poverty and more than 0.5% of trafficking rate or more than 0.2% of total drug offence rate tend to have the highest happiness score. In the same time, countries with more than 5% of poverty are likely to be among the most unhappy, independent of their drug offence rates which can range between 0% for Ghana and 0.12% for Georgia. Tajikistan, Uzbekistan, Nepal, and Colombia appear to be exceptions which report good happiness score despite poverty rate exceeding 6% and relatively low registered offence rate.</p>
 
-            <p>However, this kind of police data has its downsides when estimating country's drug use level using the rate of offences. It reflects the result of the actions of law enforsment institutions, which in their turn depend on political and cultural factors. We can easily imagine that in some countries "war on drugs" is not a priority. We can also imagine the existence of corrupt law enforcement officers who charge money in order to avoid to the offenders the court or an official fine. To see the fuller picture of drug use trends we need data of different origin, which is the subject of the next section.</p>
+            <p>However, this kind of police data has its downsides when estimating a country's drug use level using the rate of offences. It reflects the result of the actions of law enforcement institutions, which in their turn depend on political and cultural factors. We can easily imagine that in some countries, "war on drugs" is not a priority. We can also imagine the existence of corrupt law enforcement officers who charge money to avoid imposing court proceedings or official fines on offenders. To see the fuller picture of drug use trends, we need data of different origin, which is the subject of the next section.</p>
           </section>
           <section id="subchapter-4.3-new-metrics">
             <h3 data-heading="Creating Additional Metrics">Creating Additional Metrics</h3>
 
-            <p><a href="https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-2022.html">The World Drugs Report 2022</a> provides us with a spreadsheet containing information about percentage of people having used drugs in the last year broken down by different types of drugs in the spreadsheet <code>1.2_-_Prevalence_of_drug_use_in_the_general_population_including_NPS_national_data.xlsx</code> provided by <a href="https://www.unodc.org/">UNODC</a> as a part of Statistical annex to the World Drug Report 2022. I decided to estimate general drug consumption from this data. But what function to use to aggregate the data? Sum is the first that comes to mind. But it has a problem: as people from these surveys could use more than one type of drug, it does not make sense to simply add the percentages across different types of drugs. That is why I decided to take <em>the average and the maximum across types of drugs</em> for the most recent year available to estimate countries' consumption level.</p>
+            <p><a class="text" href="https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-2022.html">The World Drugs Report 2022</a> provides us with a spreadsheet containing information about percentage of people having used drugs in the last year broken down by different types of drugs in the spreadsheet <code>1.2_-_Prevalence_of_drug_use_in_the_general_population_including_NPS_national_data.xlsx</code> provided by <a href="https://www.unodc.org/" class="text">UNODC</a> as a part of the Statistical annex to the World Drug Report 2022. I decided to estimate general drug consumption from this data. But what function to use to aggregate the data? Sum is the first that comes to mind. But it has a problem: as people from these surveys could use more than one type of drug, it does not make sense to simply add the percentages across different types of drugs. That is why I decided to take <em>the average and the maximum across types of drugs</em> for the most recent year available to estimate countries' consumption level.</p>
 
-            <p>I used <code>Best</code> columns from the sheets on common drugs and <code>Past_Year_Total</code> from the sheet on various so-called NPS (New Psychoactive Substances). Data about NPS is presented on a single sheet, so after deleting all the rows that do not contain my target metric <code>Past_Year_Total</code>, I separated it into one sheet per substance. Per country tables for each common drug type (9) and each NPS (12) became sheets of my <code>summary_drug-poverty-happiness.xlsx</code>. I aggregated data using XLOOKUP on the summary sheet and applied "average" and "maximum" aggregation functions. I named the columns <code>Average_last_year</code> and <code>Max_last_year</code> respectively. I also added <code>What is max</code> column to indicate which drug is the most popular in a given country.</p>
+            <p>I used <code>Best</code> columns from the sheets on common drugs and <code>Past_Year_Total</code> from the sheet on various so-called NPS (New Psychoactive Substances). Data about NPS is presented on a single sheet, so after deleting all the rows that do not contain my target metric <code>Past_Year_Total</code>, I separated it into one sheet per substance. Per country tables for each common drug type (9) and each NPS (12) became sheets of my <code>summary_drug-poverty-happiness.xlsx</code>. I aggregated data using XLOOKUP on the summary sheet and applied "average" and "maximum" aggregation functions. I named the columns <code>Average_last_year</code> and <code>Max_last_year</code> respectively. I also added a <code>What_is_max</code> column to indicate which drug is the most popular in a given country.</p>
           </section>
           <section id="subchapter-4.4-survey-data">
             <h3>Analysis of Survey Data</h3>
@@ -410,7 +410,7 @@
               vizElement.parentNode.insertBefore(scriptElement, vizElement);
             </script>
             <!-------Map: Max Last Year Usage vs. Poverty-------->
-            <div class='tableauPlaceholder' id='viz1673135052676' style='position: relative'>
+            <!-- <div class='tableauPlaceholder' id='viz1673135052676' style='position: relative'>
               <noscript><a href='#'><img alt='Maximum Use Last Year vs. Poverty and Happiness ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Dr&#47;DrugsPovertyandHappiness&#47;MaxvsPovertyandHappiness&#47;1_rss.png' style='border: none' />
               </a>
               </noscript>
@@ -437,7 +437,7 @@
               var scriptElement = document.createElement('script');
               scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
               vizElement.parentNode.insertBefore(scriptElement, vizElement);
-            </script>
+            </script> -->
             <!-------Scatter: Average Use Last Year vs. Poverty and Happiness------>
             <div class='tableauPlaceholder' id='viz1673132715978' style='position: relative'>
               <noscript><a href='#'><img alt='Average Use Last Year vs. Poverty and Happiness ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Dr&#47;DrugsPovertyandHappiness&#47;AveragevsPovertyandHappiness&#47;1_rss.png' style='border: none' />
@@ -469,7 +469,7 @@
               vizElement.parentNode.insertBefore(scriptElement, vizElement);
             </script>
             <!-------Scatter: Max Use Last Year vs. Poverty and Happiness------>
-            <div class='tableauPlaceholder' id='viz1673133589175' style='position: relative'>
+            <!-- <div class='tableauPlaceholder' id='viz1673133589175' style='position: relative'>
               <noscript><a href='#'><img alt='Maximum Use Last Year vs. Poverty and Happiness ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Dr&#47;DrugsPovertyandHappiness&#47;MaxvsPovertyandHappiness&#47;1_rss.png' style='border: none' />
               </a>
               </noscript>
@@ -497,7 +497,7 @@
               var scriptElement = document.createElement('script');
               scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
               vizElement.parentNode.insertBefore(scriptElement, vizElement);
-            </script>
+            </script> -->
             <!---------Scatter: Poverty vs Happiness-------->
             <div class='tableauPlaceholder' id='viz1673134059088' style='position: relative'>
               <noscript><a href='#'><img alt='Poverty vs. Happiness ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Dr&#47;DrugsPovertyandHappiness&#47;AveragevsPovertyandHappiness2_1&#47;1_rss.png' style='border: none' />
@@ -527,11 +527,11 @@
               scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
               vizElement.parentNode.insertBefore(scriptElement, vizElement);
             </script>
-            <p>It is obvious from the distributions in <code>Average Use Last Year vs. Poverty and Happiness</code> and in <code>Max Use Last Year vs. Poverty and Happiness</code> scatter plots that there is no relation between usage and poverty. On the one hand, usage can be high in both poorest countires (like Zambia, Madagascar, Haiti and Nigeria) and the countries less touched by poverty (for example France, Switzerland and Ireland), on the other hand, low usage occurs in the poorest countries with more than 10% of extreme poverty (Congo, Turkmenistan, Senegal) and the those with less than 1% of extreme poverty (Turkey, South Korea, Moldova). The same can be seen on the map <code>Average Last Year Usage vs. Poverty</code>, the distribution on which contrasts with maps based on police reports.</p>
+            <p>It is obvious from the distributions in <code>Average Use Last Year vs. Poverty and Happiness</code> and in <code>Max Use Last Year vs. Poverty and Happiness</code> scatter plots that there is no relation between usage and poverty. On the one hand, usage can be high in both poorest countries (like Zambia, Madagascar, Haiti, and Nigeria) and the countries less touched by poverty (for example France, Switzerland, and Ireland), on the other hand, low usage occurs in the poorest countries with more than 10% of extreme poverty (Congo, Turkmenistan, Senegal) and the those with less than 1% of extreme poverty (Turkey, South Korea, Moldova). The same can be seen on the map <code>Average Last Year Usage vs. Poverty</code>, the distribution on which contrasts with maps based on police reports.</p>
 
-            <p>Given information from the previous section we can conclude that there probably is a relation between police interventions against users and traffickants in poorer and wealthier countries, but there is no relation between poverty and actual drug use. The trend identified in the previous section is rooted in law enforcement practices. The police pays more attention to the drug-related offences in wealthier contries.</p>
+            <p>Given information from the section on <a href="#subchapter-4.2-police-data" class="text">police data</a>, we can conclude that there probably is a relation between police interventions against users and traffickers in poorer and wealthier countries, but there is no relation between poverty and actual drug use. The trend identified in the previous section is rooted in law enforcement practices. The police pays more attention to the drug-related offences in wealthier countries.</p>
 
-            <p>In the same time there is probably a negative relationship between poverty and happiness. Countries with low poverty rate are more likely to be happy as it shows <code>Average Use Last Year vs Poverty and Happiness</code>  plot. We can add a sidenote that happier countries tend to have higher cannabis use rates as can be seen on the same plot: the greener the point (more than 0.9%), the higher is the cannabis use rate.</p>
+            <p>At the same time, there is probably a negative relationship between poverty and happiness. Countries with low poverty rate are more likely to have happier population, as it shows <code>Poverty vs. Happiness</code>  plot. We can add as a sidenote that happier countries tend to have higher cannabis use rates, as can be seen on the same plot: the greener the point (more than 0.9%), the higher is the cannabis use rate.</p>
           </section>
         </section>
         <section id="chapter-5-conclusion">
@@ -545,7 +545,7 @@
     <section class="footnotes"><hr><ol>
       <li data-footnote-id="fn-1-b6efabc080de551a" id="fn-1-b6efabc080de551a">
       Alternatively, I could have used the average from all years that have data.
-      <a href="#fnref-1-b6efabc080de551a" class="footnote-backref footnote-link" target="_blank" rel="noopener">↩︎</a>
+      <a class="text" href="#fnref-1-b6efabc080de551a" class="footnote-backref footnote-link" target="_blank" rel="noopener">↩︎</a>
       </li>
       </ol>
     </section>

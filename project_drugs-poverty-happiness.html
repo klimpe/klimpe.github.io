@@ -151,6 +151,30 @@
           <h2 data-heading="4. Analysis">4. Analysis</h2>
           <section id="subchapter-4.1-type-viz">
             <h3>Types of Visualizations</h3>
+
+            <p>Metrics chosen for this project such as rate of possession-related offences, trafficking-related offences and total rate of drug related offences can tell us something about illegal drug market and societies' relations to it, particularly if they are associated with such metrics as poverty rate or happiness score.</p>
+
+            <h4>Maps</h4>
+            <p>To begin to make sense of the data, I represented drug-related crime rates along with the percentage of people living in extreme poverty, both broken down by country, on a world map. Two types of offences are (1) related to possession and use and (2) related to trafficking. Along with total drug offence rate, they gave rise to three maps shown in the next section:
+            <ul>
+              <li><code>Total Drug Offences vs. Poverty</code></li>
+              <li><code>Use Offences vs. Poverty</code></li>
+              <li><code>Trafficking Offences vs. Poverty</code></li>
+            </ul>
+            The offence rate is represented by size of circles. The poverty rate is indicated by the color of circles. Blue corresponds to 0% (or to missing data), purple and cold pinkish colors to intermediate values between blue and yellow, which corresponds to 0.9%, orange corresponds to about 30% and bright red to 82% of the country's population living with under $2.15 a day.</p>
+
+            <h4>Scatter plots</h4>
+            <p>Another type of plot I found useful is a scatter plot of rate of a drug-related metric on the x-axis and of the inverse of extreme poverty percentage on the y-axis (so that the poorest are shown towards the bottom on the plot), using logarithmic scales on both axes. They also include the happiness score metric, color-coding the reported level of happiness in the presented countries with lowest happiness scores shown in bright red and highest in bright green. In the context of police data, three such plots have been created:
+            <ul>
+              <li><code>Drug Offences vs. Poverty and Happiness</code></li>
+              <li><code>Use Offences vs. Poverty and Happiness</code></li>
+              <li><code>Trafficking Offences vs. Poverty and Happiness</code></li>
+            </ul>
+            </p>
+          </section>
+          <section id="subchapter-4.2-police-data">
+            <h3>Analysis of Police Data</h3>
+
             <!--------Map: Total Drug Offences vs. Poverty----------->
             <div class='tableauPlaceholder' id='viz1673002249884' style='position: relative'>
               <noscript>
@@ -326,30 +350,8 @@
               scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
               vizElement.parentNode.insertBefore(scriptElement, vizElement);
             </script>
-            <p>Metrics chosen for this project such as rate of possession-related offences, trafficking-related offences and total rate of drug related offences can tell us something about illegal drug market and societies' relations to it, particularly if they are associated with such metrics as poverty rate or happiness score.</p>
 
-            <h4>Maps</h4>
-            <p>To begin to make sense of the data, I represented drug-related crime rates along with the percentage of people living in extreme poverty, both broken down by country, on a world map. Two types of offences are (1) related to possession and use and (2) related to trafficking. Along with total drug offence rate, they gave rise to three maps shown above:
-            <ul>
-              <li><code>Total Drug Offences vs. Poverty</code></li>
-              <li><code>Use Offences vs. Poverty</code></li>
-              <li><code>Trafficking Offences vs. Poverty</code></li>
-            </ul>
-            The offence rate is represented by size of circles. The poverty rate is indicated by the color of circles. Blue corresponds to 0% (or to missing data), purple and cold pinkish colors to intermediate values between blue and yellow, which corresponds to 0.9%, orange corresponds to about 30% and bright red to 82% of the country's population living with under $2.15 a day.</p>
-
-            <h4>Scatter plots</h4>
-            <p>Another type of plot I found useful is a scatter plot of rate of a drug-related metric on the x-axis and of the inverse of extreme poverty percentage on the y-axis (so that the poorest are shown towards the bottom on the plot), using logarithmic scales on both axes. They also include the happiness score metric, color-coding the reported level of happiness in the presented countries with lowest happiness scores shown in bright red and highest in bright green. In the context of police data, three such plots have been created:
-            <ul>
-              <li><code>Drug Offences vs. Poverty and Happiness</code></li>
-              <li><code>Use Offences vs. Poverty and Happiness</code></li>
-              <li><code>Trafficking Offences vs. Poverty and Happiness</code></li>
-            </ul>
-            </p>
-          </section>
-          <section id="subchapter-4.2-police-data">
-            <h3>Analysis of Police Data</h3>
-
-            <p>On the <code>Use Offences vs. Poverty</code> and <code>Total Drug Offences vs. Poverty</code> maps, we can clearly see a cluster of high rate of registered use offences and total offences in the rich European countries.</p>
+            <p style="padding-top: 40px">On the <code>Use Offences vs. Poverty</code> and <code>Total Drug Offences vs. Poverty</code> maps, we can clearly see a cluster of high rate of registered use offences and total offences in the rich European countries.</p>
 
             <p>In absolute numbers in our data European countries and North America, richer parts of the world, which represent 33.3% of the countries in the dataset, account for 447 931 trafficking offences amounting to 53.2% of world's trafficking cases.</p>
 
@@ -523,7 +525,7 @@
               scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
               vizElement.parentNode.insertBefore(scriptElement, vizElement);
             </script>
-            <p>Contrary to what we saw with police data, it is obvious from the distributions in <code>Average Use Last Year vs. Poverty and Happiness</code> and in <code>Max Use Last Year vs. Poverty and Happiness</code> scatter plots that there is <strong>no relation between usage and poverty</strong>. On the one hand, usage can be high in both poorest countries (like Zambia, Madagascar, Haiti, and Nigeria) and the countries less touched by poverty (for example France, Switzerland, and Ireland), on the other hand, low usage occurs in the poorest countries with more than 10% of extreme poverty (Congo, Turkmenistan, Senegal) and the those with less than 1% of extreme poverty (Turkey, South Korea, Moldova). The same can be seen on the map <code>Average Last Year Usage vs. Poverty</code>, the distribution on which contrasts with maps based on police reports.</p>
+            <p style="padding-top: 40px">Contrary to what we have seen with police data, it is obvious from the distributions in <code>Average Use Last Year vs. Poverty and Happiness</code> and in <code>Max Use Last Year vs. Poverty and Happiness</code> scatter plots that there is <strong>no relation between usage and poverty</strong>. On the one hand, usage can be high in both poorest countries (like Zambia, Madagascar, Haiti, and Nigeria) and the countries less touched by poverty (for example France, Switzerland, and Ireland), on the other hand, low usage occurs in the poorest countries with more than 10% of extreme poverty (Congo, Turkmenistan, Senegal) and the those with less than 1% of extreme poverty (Turkey, South Korea, Moldova). The same can be seen on the map <code>Average Last Year Usage vs. Poverty</code>, the distribution on which contrasts with maps based on police reports.</p>
 
             <p>Given information from the section on <a href="#subchapter-4.2-police-data" class="text">police data</a>, we can conclude that there probably is a relation between police interventions against users and traffickers in poorer and wealthier countries, but there is no relation between poverty and actual drug use. The trend identified in the previous section is rooted in law enforcement practices. The police pays more attention to the drug-related offences in wealthier countries. As for the happiness score and drug use, we can notice that on <code>Average Use Last Year vs. Poverty and Happiness</code> plot there are more green points to the right of the median, which may indicate that higher usage is associated with higher happiness score.</p>
 
@@ -534,17 +536,16 @@
           <h2 data-heading="Conclusion">Conclusion</h2>
           <p>In conclusion, this study analyzed the relationship between drug consumption, drug-related crimes, poverty, and perceived happiness at the country level. The data for this study was gathered from multiple sources and preprocessed in order to properly analyze the correlations between these factors. The results of the analysis showed that there is a negative correlation between happiness and poverty, a positive correlation between happiness and drug-related crimes, and a positive correlation between happiness and drug use. We found no evidence of a link between drug usage and poverty rate. These findings suggest that stricter policies aimed at reducing drug-related crime do not lead to lower usage, while policies aimed at reduction of poverty may lead to increased happiness in the population. These results can inform political decision-makers in their efforts to maximize the happiness of the population.</p>
         </section>
+        <section class="footnotes"><hr><ol>
+          <li data-footnote-id="fn-1-b6efabc080de551a" id="fn-1-b6efabc080de551a">
+          Alternatively, I could have used the average from all years that have data.
+          <a class="text" href="#fnref-1-b6efabc080de551a" class="footnote-backref footnote-link" target="_blank" rel="noopener">↩︎</a>
+          </li>
+          </ol>
+        </section>
       </div>
     </div>
   </div>
-
-    <section class="footnotes"><hr><ol>
-      <li data-footnote-id="fn-1-b6efabc080de551a" id="fn-1-b6efabc080de551a">
-      Alternatively, I could have used the average from all years that have data.
-      <a class="text" href="#fnref-1-b6efabc080de551a" class="footnote-backref footnote-link" target="_blank" rel="noopener">↩︎</a>
-      </li>
-      </ol>
-    </section>
   </div>
 </body>
 </html>
